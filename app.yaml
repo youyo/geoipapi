@@ -1,0 +1,9 @@
+runtime: python37
+api_version: 1
+
+handlers:
+- url: /.*
+  script: main.app
+
+env_variables:
+  GEOIP2_DB_FILE_NAME: GeoLite2-Country.mmdb
