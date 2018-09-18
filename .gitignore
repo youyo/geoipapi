@@ -2,3 +2,4 @@
 .envrc
 *.mmdb
 *.tgz
+credentials.json

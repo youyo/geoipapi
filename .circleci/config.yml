@@ -1,0 +1,36 @@
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: master
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: master
+
+version: 2
+jobs:
+  deploy:
+    working_directory: ~/geoipapi
+    docker:
+      - image: google/cloud-sdk:alpine
+    steps:
+      - checkout
+      - run:
+          name: Deploy
+          command: |
+            apk add make --no-cache
+            make decrypt
+            make deploy

@@ -3,6 +3,7 @@ PROJECT_ID := ${PROJECT_ID}
 GEOIP2_DB_FILE_NAME := ${GEOIP2_DB_FILE_NAME}
 GEOIP2_DB_FILE_URL := ${GEOIP2_DB_FILE_URL}
 GEOIP2_DB_FILE_TGZ := ${GEOIP2_DB_FILE_TGZ}
+ENCRYPT_PASS := ${ENCRYPT_PASS}
 
 ## Deploy
 deploy: download_db
@@ -22,6 +23,20 @@ logs:
 ## Open application
 open:
 	gcloud app browse
+
+## Encrypt credential file
+encrypt:
+	openssl enc -e -aes-256-cbc -salt \
+		-k $(ENCRYPT_PASS) \
+		-in credentials.json \
+		-out credentials.json.enc
+
+## Decrypt credential file
+decrypt:
+	openssl enc -d -aes-256-cbc -salt \
+		-k $(ENCRYPT_PASS) \
+		-in credentials.json.enc \
+		-out credentials.json
 
 ## Show help
 help:
