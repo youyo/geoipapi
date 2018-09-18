@@ -33,4 +33,5 @@ jobs:
           command: |
             apk add make openssl --no-cache
             make decrypt
+            make activate
             make deploy

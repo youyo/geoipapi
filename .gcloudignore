@@ -18,3 +18,5 @@ __pycache__/
 .direnv/
 .envrc
 Makefile
+.circleci/
+credentials.json.enc
